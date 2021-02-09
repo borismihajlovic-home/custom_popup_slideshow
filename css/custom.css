@@ -1,0 +1,10 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.title{
+    text-align: center;
+}

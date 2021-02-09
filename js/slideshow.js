@@ -79,13 +79,12 @@ const prevNextSlideHandler = (galleryModal, isNext)=>{
      
     // Slideshow
     const slideshowModal = document.querySelector('#slideshow');
-    const imageContainerList = document.querySelectorAll('#imagesContainer div');
+    const imageContainerList = document.querySelectorAll('#gallery .item');
     const modalCloseElement = document.querySelector('.close');
     const imagesList = document.querySelectorAll('.images-wrapper img');
     const nextSlideEl = slideshowModal.querySelector('.right');
     const previousSlideEl = slideshowModal.querySelector('.left');
     if(slideshowModal){
-        // console.log(imageContainerList);
         setImagesPosition(slideshowModal, imagesList);
 
         imageContainerList.forEach(item => item.addEventListener('click', toggleSlideshowHandler.bind(false, slideshowModal)));

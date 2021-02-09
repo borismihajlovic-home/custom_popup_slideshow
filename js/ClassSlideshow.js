@@ -6,7 +6,7 @@ class Slideshow{
     imagesList = document.querySelectorAll('.images-wrapper img');
     nextSlideEl = this.slideshowModal.querySelector('.right');
     previousSlideEl = this.slideshowModal.querySelector('.left');
-    imageContainerList = document.querySelectorAll(`#imagesContainer div`);  // gallery images container
+    imageContainerList = document.querySelectorAll('#gallery .item');  // gallery images container
     
 
     openSlideshowModal(galleryModal, imagesWrapper){
@@ -108,8 +108,3 @@ class Slideshow{
     
 
 }
-
-
-
-const slideshow = new Slideshow();
-slideshow.setup()
