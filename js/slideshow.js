@@ -79,7 +79,7 @@ const prevNextSlideHandler = (galleryModal, isNext)=>{
      
     // Slideshow
     const slideshowModal = document.querySelector('#slideshow');
-    const imageContainerList = document.querySelectorAll('.images-container div');
+    const imageContainerList = document.querySelectorAll('#imagesContainer div');
     const modalCloseElement = document.querySelector('.close');
     const imagesList = document.querySelectorAll('.images-wrapper img');
     const nextSlideEl = slideshowModal.querySelector('.right');
