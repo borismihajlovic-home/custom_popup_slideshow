@@ -47,35 +47,39 @@ class Slideshow{
         return positionValue;
     }
 
-    nextSlide(imagesWrapper, imagesList, currentSlide){
+    nextSlide(imagesWrapper, imagesList, nextSlide){
+        let currentSlide;
+        nextSlide === 0 ? currentSlide = imagesList.length-1 : currentSlide = nextSlide - 1;
+        
         imagesList[currentSlide].style.removeProperty('opacity');
-        imagesList[currentSlide + 1].style.setProperty('opacity', '1');
-        imagesWrapper.dataset.selectedSlide = currentSlide + 1;
+        imagesList[nextSlide].style.setProperty('opacity', '1');
+        imagesWrapper.dataset.selectedSlide = nextSlide;
         imagesWrapper.classList.add('visible');
     }
 
-    previousSlide(imagesWrapper,imagesList, currentSlide){
+    previousSlide(imagesWrapper,imagesList, previousSlide){
+        let currentSlide;
+        previousSlide == imagesList.length - 1 ? currentSlide = 0 : currentSlide = previousSlide + 1;
+
         imagesList[currentSlide].style.removeProperty('opacity');
-        imagesList[currentSlide - 1].style.setProperty('opacity', '1');
-        imagesWrapper.dataset.selectedSlide = currentSlide - 1;
+        imagesList[previousSlide].style.setProperty('opacity', '1');
+        imagesWrapper.dataset.selectedSlide = previousSlide;
         imagesWrapper.classList.add('visible');
     }
 
     prevNextSlideHandler(galleryModal, isNext){
         const imagesWrapper = galleryModal.querySelector('.images-wrapper');
         const currentVisibleSlide = parseInt(imagesWrapper.dataset.selectedSlide);
-        // let nextVisibleSlide = currentVisibleSlide++;
-        // let previousVisibleSlide = currentVisibleSlide--;
+        let nextVisibleSlide = currentVisibleSlide + 1;
+        let previousVisibleSlide = currentVisibleSlide - 1;
         const imagesList = imagesWrapper.querySelectorAll('img');
-     
-        (isNext && currentVisibleSlide < imagesList.length - 1) || (!isNext  && currentVisibleSlide > 0) ? imagesWrapper.classList.remove('visible') : null;
-    
+         
+        imagesWrapper.classList.remove('visible');
         setTimeout(()=>{
-            if(isNext && currentVisibleSlide < imagesList.length - 1){            
-                this.nextSlide(imagesWrapper, imagesList, currentVisibleSlide);
-            } else if (!isNext  && currentVisibleSlide > 0){
-                this.previousSlide(imagesWrapper, imagesList, currentVisibleSlide)
-            }
+            if(isNext && nextVisibleSlide < imagesList.length){ this.nextSlide(imagesWrapper, imagesList, nextVisibleSlide); } 
+            if(isNext && nextVisibleSlide == imagesList.length){ this.nextSlide(imagesWrapper, imagesList, 0); } 
+            if (!isNext  && previousVisibleSlide >= 0){ this.previousSlide(imagesWrapper, imagesList, previousVisibleSlide); }
+            if (!isNext  && previousVisibleSlide < 0){ this.previousSlide(imagesWrapper, imagesList, imagesList.length - 1); }
         }, 200);
         
     }
@@ -102,7 +106,6 @@ class Slideshow{
         }
     }
     
-
 
 }
 
