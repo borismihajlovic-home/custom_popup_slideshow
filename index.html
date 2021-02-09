@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Slideshow</title>
+
+    <link rel="stylesheet" href="./css/slideshow.css">
+    <link rel="stylesheet" href="./css/custom.css">
+</head>
+<body>
+    <h1 class="title">Custom popup slideshow example</h1>
+
+    <section class="images-container">
+
+        <div>
+            <img src="./img/green-with-envy.jpg" alt="image">
+        </div>
+        <div>
+            <img src="./img/handshakes.png" alt="image">
+        </div>
+        <div>
+            <img src="./img/whatz-you-lookin-at.jpg" alt="image">
+        </div>
+        <div>
+            <img src="./img/yes-i-do-know-a-lot-lot.jpg" alt="image">
+        </div>
+        
+    </section>
+
+
+    <section id="slideshow" class="slider-modal">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="close"></div>
+        <div class="images-wrapper" data-selected-slide="0">
+            <img src="./img/green-with-envy.jpg" alt="image" style="opacity:1;">
+            <img src="./img/handshakes.png" alt="image">
+            <img src="./img/whatz-you-lookin-at.jpg" alt="image">
+            <img src="./img/yes-i-do-know-a-lot-lot.jpg" alt="image">
+        </div>
+    </section>
+
+    <script src="./js/slideshow.js"></script>
+</body>
+</html>
