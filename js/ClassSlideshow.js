@@ -9,40 +9,56 @@ class Slideshow{
     imageContainerList = document.querySelectorAll('#gallery .item');  // gallery images container
     
 
-    openSlideshowModal(galleryModal, imagesWrapper){
+    
+    // klik na sliku otvara tu sliku*****************************   PODESITI IMAGE POSITION I PO VERTIKALI, NAPRAVITI DA SE RENDERUJE SLIDESHOW*****************************************************************************
+    openSlideshowModal(galleryModal, imagesWrapper, clickedImageNumber){
+        const slideshowImagesList = imagesWrapper.querySelectorAll('img');
+        slideshowImagesList[clickedImageNumber].style.setProperty('opacity', '1');
+        imagesWrapper.dataset.selectedSlide = clickedImageNumber;
         galleryModal.style.setProperty('z-index', 99);
         setTimeout(()=>{
             imagesWrapper.classList.add('visible');
         }, 200);
     };
 
+    
+
     closeSlideshowModal(galleryModal, imagesWrapper){
+        const imagesInSlideshow = imagesWrapper.querySelectorAll('img');
         setTimeout(()=>{
             galleryModal.style.removeProperty('z-index');
             imagesWrapper.classList.remove('visible');
+            imagesInSlideshow.forEach(item=>item.style.removeProperty('opacity'));
+
         }, 250);
     }
 
-    toggleSlideshowHandler(galleryModal){
+    toggleSlideshowHandler(galleryModal, event){
+        console.log(event.target);
+        const clickedImageNumber = event.target.dataset.imageNumber;
         const imagesWrapper = galleryModal.querySelector('.images-wrapper');
-        galleryModal.classList.contains('opened') ? this.closeSlideshowModal(galleryModal, imagesWrapper) : this.openSlideshowModal(galleryModal, imagesWrapper);
+        galleryModal.classList.contains('opened') ? this.closeSlideshowModal(galleryModal, imagesWrapper) : this.openSlideshowModal(galleryModal, imagesWrapper, clickedImageNumber);
         galleryModal.classList.toggle('opened');
     }
 
     setImagesPosition(galleryModal, imagesList){
         imagesList.forEach(img => {
-            const positionLeft = this.calculateImagePosition(galleryModal, img);
-            img.style.setProperty('left', `${positionLeft}px`);
+            const position = this.calculateImagePosition(galleryModal, img);
+            img.style.setProperty('left', `${position.left}px`);
+            img.style.setProperty('top', `${position.top}px`);
         });
     }
 
     calculateImagePosition(container, childElement){
         const slideshowsWrapper = container.querySelector('.images-wrapper');
         const slideshowsWrapperWidth = slideshowsWrapper.getBoundingClientRect().width;
+        const slideshowsWrapperHeight = slideshowsWrapper.getBoundingClientRect().height;
+        const childElementHeight = childElement.getBoundingClientRect().height;
         const childElementWidth = childElement.getBoundingClientRect().width;
-        let positionValue = 0;
+        let positionValue = {};
         
-        positionValue = slideshowsWrapperWidth/2 - childElementWidth/2;
+        positionValue.left = slideshowsWrapperWidth/2 - childElementWidth/2;
+        positionValue.top = slideshowsWrapperHeight/2 - childElementHeight/2;
         
         return positionValue;
     }
@@ -86,7 +102,7 @@ class Slideshow{
 
 
     // main setup method
-    setup(){
+    init(){
         if(this.slideshowModal){
             this.setImagesPosition(this.slideshowModal, this.imagesList);
     
