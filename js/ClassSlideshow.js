@@ -10,7 +10,6 @@ class Slideshow{
     
 
     
-    // klik na sliku otvara tu sliku*****************************   PODESITI IMAGE POSITION I PO VERTIKALI, NAPRAVITI DA SE RENDERUJE SLIDESHOW*****************************************************************************
     openSlideshowModal(galleryModal, imagesWrapper, clickedImageNumber){
         const slideshowImagesList = imagesWrapper.querySelectorAll('img');
         slideshowImagesList[clickedImageNumber].style.setProperty('opacity', '1');
@@ -100,17 +99,64 @@ class Slideshow{
         
     }
 
+    createElement(el, elementClass){
+        const newElement = document.createElement(el);
+        newElement.className = elementClass;
+        return newElement;
+    }
+
+    createSlideshowModal(){
+        const slideshowModal = this.createElement('section', 'slider-modal');
+        slideshowModal.id = 'slideshow';
+        const leftArrowElement = this.createElement('div', 'left');
+        const rightArrowElement = this.createElement('div', 'right');
+        const closeButtonElement = this.createElement('div', 'close');
+        slideshowModal.appendChild(leftArrowElement);
+        slideshowModal.appendChild(rightArrowElement);
+        slideshowModal.appendChild(closeButtonElement);
+        
+        return slideshowModal;
+    }
+
+    createSlideshowImageWrapper(galleryImages){
+        const wrapperElement = this.createElement('div', 'images-wrapper');
+
+        galleryImages.forEach(image => {
+            const imageForSlideshow = image.cloneNode(true);
+            const imageNumber = image.dataset.imageNumber;
+            imageForSlideshow.removeAttribute('data-image-number');
+            imageForSlideshow.setAttribute('data-slide', imageNumber);
+            wrapperElement.appendChild(imageForSlideshow);
+        });
+
+        return wrapperElement;
+    }
+
 
     // main setup method
     init(){
+
+        /* ********************* Create and append slideshow  ************************* */
+        // REFORMAT SO USER PASS GALLERY ID, PULL EVERYTHING OUT THAT CAN BE PULLED
+        const gallery = document.querySelector('#gallery');
+        const galleryImagesList = gallery.querySelectorAll('img');
+        const slideshowContainerElement = this.createSlideshowModal();
+        const imagesWrapperElement = this.createSlideshowImageWrapper(galleryImagesList);
+
+        slideshowContainerElement.appendChild(imagesWrapperElement);        
+        // document.body.appendChild(slideshowContainerElement);
+        /* ********************* End Create and append slideshow  ************************* */
+
         if(this.slideshowModal){
             this.setImagesPosition(this.slideshowModal, this.imagesList);
     
-            this.imageContainerList.forEach(item => item.addEventListener('click', this.toggleSlideshowHandler.bind(this, this.slideshowModal)));
+            this.imageContainerList.forEach(item => {
+                item.addEventListener('click', this.toggleSlideshowHandler.bind(this, this.slideshowModal))
+            });
             this.modalCloseElement.addEventListener('click', this.toggleSlideshowHandler.bind(this, this.slideshowModal));
     
             window.onresize = ()=>{
-                setImagesPosition(this.slideshowModal, this.imagesList);
+                this.setImagesPosition(this.slideshowModal, this.imagesList);
             };
     
             // next/previous slide
