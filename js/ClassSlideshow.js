@@ -2,6 +2,9 @@ console.log(' slideshow js loaded....');
 
 class Slideshow{
     
+    constructor(galleryId){
+        this.galleryId = galleryId;
+    }
 
     
     openSlideshowModal(galleryModal, imagesWrapper, clickedImageNumber){
@@ -27,7 +30,6 @@ class Slideshow{
     }
 
     toggleSlideshowHandler(galleryModal, event){
-        console.log(event.target);
         const clickedImageNumber = event.target.dataset.imageNumber;
         const imagesWrapper = galleryModal.querySelector('.images-wrapper');
         galleryModal.classList.contains('opened') ? this.closeSlideshowModal(galleryModal, imagesWrapper) : this.openSlideshowModal(galleryModal, imagesWrapper, clickedImageNumber);
@@ -132,24 +134,27 @@ class Slideshow{
 
         
         /* ********************* Create and append slideshow  ************************* */
-        // REFORMAT SO USER PASS GALLERY ID, PULL EVERYTHING OUT THAT CAN BE PULLED
-        const gallery = document.querySelector('#gallery');
+        const gallery = document.querySelector(`#${this.galleryId}`);
         const galleryImagesList = gallery.querySelectorAll('img');
-        const slideshowContainerElement = this.createSlideshowModal();
-        const imagesWrapperElement = this.createSlideshowImageWrapper(galleryImagesList);
         
-        slideshowContainerElement.appendChild(imagesWrapperElement);        
-        document.body.appendChild(slideshowContainerElement);
-
+        const imagesWrapperElement = this.createSlideshowImageWrapper(galleryImagesList);
+        const slideshowModal = this.createSlideshowModal();
+        
+        slideshowModal.appendChild(imagesWrapperElement);        
+        document.body.appendChild(slideshowModal);
         /* ********************* End Create and append slideshow  ************************* */
         
-        const slideshowModal = document.querySelector('#slideshow');
-        const modalCloseElement = document.querySelector('.close');
-        const imagesList = document.querySelectorAll('.images-wrapper img');
+
+        /* ********************* Get all other needed elements  ************************* */
+        const modalCloseElement = slideshowModal.querySelector('.close');
+        const imagesList = imagesWrapperElement.querySelectorAll('img');
         const nextSlideEl = slideshowModal.querySelector('.right');
         const previousSlideEl = slideshowModal.querySelector('.left');
-        const imageContainerList = document.querySelectorAll('#gallery .item');  // gallery images container
+        const imageContainerList = gallery.querySelectorAll('.item');  // gallery images container
+        /* ********************* End Get all other needed elements  ************************* */
+
         
+        /* ********************* Set slideshow images position and functionality  ************************* */
         if(slideshowModal){
             this.setImagesPosition(slideshowModal, imagesList);
     
@@ -169,6 +174,8 @@ class Slideshow{
         }else{
             console.warn('ERROR: No slideshow modal');
         }
+
+        /* ********************* End Set slideshow images position and functionality  ************************* */
     }
     
 
