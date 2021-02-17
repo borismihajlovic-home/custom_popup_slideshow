@@ -1,12 +1,6 @@
 console.log(' slideshow js loaded....');
 
 class Slideshow{
-    slideshowModal = document.querySelector('#slideshow');
-    modalCloseElement = document.querySelector('.close');
-    imagesList = document.querySelectorAll('.images-wrapper img');
-    nextSlideEl = this.slideshowModal.querySelector('.right');
-    previousSlideEl = this.slideshowModal.querySelector('.left');
-    imageContainerList = document.querySelectorAll('#gallery .item');  // gallery images container
     
 
     
@@ -136,32 +130,41 @@ class Slideshow{
     // main setup method
     init(){
 
+        
         /* ********************* Create and append slideshow  ************************* */
         // REFORMAT SO USER PASS GALLERY ID, PULL EVERYTHING OUT THAT CAN BE PULLED
         const gallery = document.querySelector('#gallery');
         const galleryImagesList = gallery.querySelectorAll('img');
         const slideshowContainerElement = this.createSlideshowModal();
         const imagesWrapperElement = this.createSlideshowImageWrapper(galleryImagesList);
-
+        
         slideshowContainerElement.appendChild(imagesWrapperElement);        
-        // document.body.appendChild(slideshowContainerElement);
-        /* ********************* End Create and append slideshow  ************************* */
+        document.body.appendChild(slideshowContainerElement);
 
-        if(this.slideshowModal){
-            this.setImagesPosition(this.slideshowModal, this.imagesList);
+        /* ********************* End Create and append slideshow  ************************* */
+        
+        const slideshowModal = document.querySelector('#slideshow');
+        const modalCloseElement = document.querySelector('.close');
+        const imagesList = document.querySelectorAll('.images-wrapper img');
+        const nextSlideEl = slideshowModal.querySelector('.right');
+        const previousSlideEl = slideshowModal.querySelector('.left');
+        const imageContainerList = document.querySelectorAll('#gallery .item');  // gallery images container
+        
+        if(slideshowModal){
+            this.setImagesPosition(slideshowModal, imagesList);
     
-            this.imageContainerList.forEach(item => {
-                item.addEventListener('click', this.toggleSlideshowHandler.bind(this, this.slideshowModal))
+            imageContainerList.forEach(item => {
+                item.addEventListener('click', this.toggleSlideshowHandler.bind(this, slideshowModal))
             });
-            this.modalCloseElement.addEventListener('click', this.toggleSlideshowHandler.bind(this, this.slideshowModal));
+            modalCloseElement.addEventListener('click', this.toggleSlideshowHandler.bind(this, slideshowModal));
     
             window.onresize = ()=>{
-                this.setImagesPosition(this.slideshowModal, this.imagesList);
+                this.setImagesPosition(slideshowModal, imagesList);
             };
     
             // next/previous slide
-            this.nextSlideEl.addEventListener('click', this.prevNextSlideHandler.bind(this, this.slideshowModal, true));
-            this.previousSlideEl.addEventListener('click', this.prevNextSlideHandler.bind(this, this.slideshowModal, false));
+            nextSlideEl.addEventListener('click', this.prevNextSlideHandler.bind(this, slideshowModal, true));
+            previousSlideEl.addEventListener('click', this.prevNextSlideHandler.bind(this, slideshowModal, false));
     
         }else{
             console.warn('ERROR: No slideshow modal');
