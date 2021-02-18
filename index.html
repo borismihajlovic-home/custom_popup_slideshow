@@ -6,28 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Popup Slideshow</title>
 
+    <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/slideshow.css">
     <link rel="stylesheet" href="./css/custom.css">
 </head>
 <body>
-    <h1 class="title">Custom popup slideshow example</h1>
+    <main>
+        <h1 class="title">Custom popup slideshow example</h1>
 
-<!-- Gallery container (must have an ID that you will pass to Slider class on initialization) -->
-    <section id="gallery" class="images-container">
-        <div class="item">
-            <img src="./img/green-with-envy.jpg" alt="image" data-image-number="0">
-        </div>
-        <div class="item">
-            <img src="./img/handshakes.png" alt="image" data-image-number="1">
-        </div>
-        <div class="item">
-            <img src="./img/whatz-you-lookin-at.jpg" alt="image" data-image-number="2">
-        </div>
-        <div class="item">
-            <img src="./img/yes-i-do-know-a-lot-lot.jpg" alt="image" data-image-number="3">
-        </div>
-        
-    </section>
+        <section class="glass-pannel">
+            <aside class="glass-pannel__aside"></aside>
+                <div id="gallery" class="glass-pannel__items-container">
+                    <!-- <div class="item">
+                        <img src="./img/green-with-envy.jpg" alt="image" data-image-number="0">
+                    </div>
+                    <div class="item">
+                        <img src="./img/handshakes.png" alt="image" data-image-number="1">
+                    </div>
+                    <div class="item">
+                        <img src="./img/whatz-you-lookin-at.jpg" alt="image" data-image-number="2">
+                    </div>
+                    <div class="item">
+                        <img src="./img/yes-i-do-know-a-lot-lot.jpg" alt="image" data-image-number="3">
+                    </div> -->
+                </div>
+        </section>
+
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+    </main>
+
+
 
     <!-- POPUP SLIDESHOW MODAL -->
     <!-- <section id="slideshow" class="slider-modal">

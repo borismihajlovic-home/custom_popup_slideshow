@@ -134,7 +134,7 @@ class Slideshow{
 
         
         /* ********************* Create and append slideshow  ************************* */
-        const gallery = document.querySelector(`#${this.galleryId}`);
+        const gallery = document.querySelector(this.galleryId);
         const galleryImagesList = gallery.querySelectorAll('img');
         
         const imagesWrapperElement = this.createSlideshowImageWrapper(galleryImagesList);

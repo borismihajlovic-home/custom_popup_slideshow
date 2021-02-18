@@ -1,0 +1,70 @@
+$white: #fff;
+$orange: #f4690e;
+$orange-lite: #f9bd39;
+$box-border-radius: 1rem;
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.title{
+    text-align: center;
+}
+
+main{
+    height: 100vh;
+    padding: 2rem 10px 0 10px;
+    background: linear-gradient(to top right, $orange, $orange-lite);
+    h1.title{
+        margin-top: 0;
+    }
+    .glass-pannel{
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        height: 75vh;
+        margin: auto;
+        border-radius: $box-border-radius;
+        backdrop-filter: blur(2rem);
+        background: $white;
+        background: linear-gradient(to top right, rgba($white, 0.7), rgba($white, 0.3));
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        &__aside{
+            padding: 2em 10px;
+            width: 25%;
+            background: rgba($color: $white, $alpha: 0.5);
+            border-radius: $box-border-radius;
+        }
+        &__items-container{
+            padding: 2em 15px;
+            width: 75%;
+            min-height: 100%;
+            border-top-right-radius: $box-border-radius;
+            border-bottom-right-radius: $box-border-radius;
+            background: rgba($color: #6cf3bb, $alpha: 0.8);
+        }
+
+    }
+    .circle1,
+    .circle2{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: $white;
+        background: linear-gradient(to top right, rgba($white, 1), rgba($white, 0.4));
+        position: absolute;
+    }
+    .circle1{
+        bottom: 3vh;
+        left: 10vh;
+    }
+    .circle2{
+        top: 3vh;
+        right: 10vh;}
+
+}

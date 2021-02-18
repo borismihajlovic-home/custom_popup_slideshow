@@ -1,10 +1,66 @@
 *,
 *::before,
-*::after{
-    box-sizing: border-box;
-    font-family: sans-serif;
+*::after {
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-.title{
-    text-align: center;
+.title {
+  text-align: center;
 }
+
+main {
+  height: 100vh;
+  padding: 2rem 10px 0 10px;
+  background: linear-gradient(to top right, #f4690e, #f9bd39);
+}
+main h1.title {
+  margin-top: 0;
+}
+main .glass-pannel {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 75vh;
+  margin: auto;
+  border-radius: 1rem;
+  backdrop-filter: blur(2rem);
+  background: #fff;
+  background: linear-gradient(to top right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+main .glass-pannel__aside {
+  padding: 2em 10px;
+  width: 25%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+}
+main .glass-pannel__items-container {
+  padding: 2em 15px;
+  width: 75%;
+  min-height: 100%;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  background: rgba(108, 243, 187, 0.8);
+}
+main .circle1,
+main .circle2 {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #fff;
+  background: linear-gradient(to top right, white, rgba(255, 255, 255, 0.4));
+  position: absolute;
+}
+main .circle1 {
+  bottom: 3vh;
+  left: 10vh;
+}
+main .circle2 {
+  top: 3vh;
+  right: 10vh;
+}
+
+/*# sourceMappingURL=custom.css.map */
